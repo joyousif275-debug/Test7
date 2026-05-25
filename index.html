@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>💗 Love Story 💗</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+text-align:center;
+color:white;
+background:linear-gradient(-45deg,#ff4d6d,#ff99ac,#ff758f,#ffb3c1);
+background-size:400% 400%;
+animation:bg 10s ease infinite;
+overflow-x:hidden;
+}
+
+@keyframes bg{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+.page{
+display:none;
+}
+
+.active{
+display:block;
+}
+
+.container{
+padding:20px;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+box-sizing:border-box;
+padding-bottom:100px;
+}
+
+/* ===== INPUT ===== */
+
+input{
+padding:12px;
+border:none;
+border-radius:18px;
+font-size:17px;
+outline:none;
+width:240px;
+text-align:center;
+}
+
+/* ===== BUTTONS ===== */
+
+button,
+.nextBtn{
+display:inline-block;
+padding:16px 30px;
+border:2px solid white;
+border-radius:25px;
+background:rgba(255,255,255,0.15);
+box-shadow:0 0 20px rgba(255,255,255,0.7);
+cursor:pointer;
+transition:0.3s;
+margin-top:20px;
+font-size:22px;
+font-weight:bold;
+color:white;
+backdrop-filter:blur(5px);
+}
+
+button:hover,
+.nextBtn:hover{
+transform:scale(1.06);
+background:rgba(255,255,255,0.25);
+}
+
+/* ===== TIMER BOX ===== */
+
+.box{
+background:rgba(0,0,0,0.25);
+padding:14px;
+margin:10px;
+border-radius:18px;
+width:90%;
+max-width:500px;
+font-size:20px;
+backdrop-filter:blur(5px);
+}
+
+/* ===== LETTER ===== */
+
+.letter{
+background:white;
+color:#ff4d6d;
+padding:22px;
+border-radius:22px;
+width:92%;
+max-width:650px;
+box-shadow:0 0 20px rgba(0,0,0,0.25);
+text-align:right;
+line-height:1.7;
+font-size:15px;
+font-weight:bold;
+margin-top:10px;
+box-sizing:border-box;
+overflow-wrap:break-word;
+}
+
+/* ===== SMALL VOICE PLAYER ===== */
+
+.voicePlayer{
+position:fixed;
+bottom:18px;
+left:50%;
+transform:translateX(-50%);
+width:82%;
+max-width:420px;
+height:60px;
+background:rgba(255,255,255,0.12);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,0.28);
+border-radius:35px;
+display:flex;
+align-items:center;
+padding:0 18px;
+gap:16px;
+z-index:9999;
+box-shadow:
+0 0 25px rgba(255,255,255,0.18),
+inset 0 0 12px rgba(255,255,255,0.08);
+overflow:hidden;
+}
+
+/* زرار التشغيل */
+
+.voicePlay{
+width:42px;
+height:42px;
+border-radius:50%;
+background:rgba(255,255,255,0.18);
+display:flex;
+align-items:center;
+justify-content:center;
+flex-shrink:0;
+position:relative;
+box-shadow:0 0 12px rgba(255,255,255,0.15);
+}
+
+/* شكل الـ Pause || */
+
+.voicePlay::before,
+.voicePlay::after{
+content:"";
+width:4px;
+height:16px;
+background:white;
+border-radius:10px;
+position:absolute;
+}
+
+.voicePlay::before{
+left:14px;
+}
+
+.voicePlay::after{
+right:14px;
+}
+
+/* الخطوط الصوتية */
+
+.voiceBars{
+display:flex;
+align-items:center;
+gap:4px;
+width:100%;
+height:34px;
+}
+
+/* كل بار */
+
+.voiceBars span{
+flex:1;
+min-width:4px;
+height:12px;
+background:rgba(255,255,255,0.92);
+border-radius:20px;
+animation:voiceWave 1s infinite ease-in-out;
+box-shadow:0 0 8px rgba(255,255,255,0.45);
+}
+
+/* توزيع الحركة */
+
+.voiceBars span:nth-child(1){animation-delay:.0s;}
+.voiceBars span:nth-child(2){animation-delay:.1s;}
+.voiceBars span:nth-child(3){animation-delay:.2s;}
+.voiceBars span:nth-child(4){animation-delay:.3s;}
+.voiceBars span:nth-child(5){animation-delay:.4s;}
+.voiceBars span:nth-child(6){animation-delay:.5s;}
+.voiceBars span:nth-child(7){animation-delay:.6s;}
+.voiceBars span:nth-child(8){animation-delay:.7s;}
+.voiceBars span:nth-child(9){animation-delay:.8s;}
+.voiceBars span:nth-child(10){animation-delay:.9s;}
+.voiceBars span:nth-child(11){animation-delay:1s;}
+.voiceBars span:nth-child(12){animation-delay:1.1s;}
+.voiceBars span:nth-child(13){animation-delay:1.2s;}
+.voiceBars span:nth-child(14){animation-delay:1.3s;}
+.voiceBars span:nth-child(15){animation-delay:1.4s;}
+.voiceBars span:nth-child(16){animation-delay:1.5s;}
+.voiceBars span:nth-child(17){animation-delay:1.6s;}
+.voiceBars span:nth-child(18){animation-delay:1.7s;}
+
+@keyframes voiceWave{
+
+0%{
+height:10px;
+opacity:.45;
+}
+
+25%{
+height:18px;
+opacity:.7;
+}
+
+50%{
+height:34px;
+opacity:1;
+}
+
+75%{
+height:22px;
+opacity:.8;
+}
+
+100%{
+height:10px;
+opacity:.45;
+}
+
+}
+
+/* ===== FLOATING HEARTS ===== */
+
+.heart{
+position:fixed;
+bottom:-20px;
+font-size:20px;
+color:pink;
+animation:floatUp 6s linear infinite;
+pointer-events:none;
+z-index:999;
+opacity:.8;
+}
+
+@keyframes floatUp{
+to{
+transform:translateY(-110vh);
+opacity:0;
+}
+}
+
+/* ===== PHOTO ===== */
+
+.photoBox{
+padding:8px;
+border:4px solid white;
+border-radius:25px;
+background:pink;
+box-shadow:0 0 25px rgba(255,255,255,0.7);
+}
+
+.photoBox img{
+width:320px;
+max-width:90vw;
+border-radius:18px;
+display:block;
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:600px){
+
+h1{
+font-size:32px;
+}
+
+h2{
+font-size:28px;
+}
+
+.letter{
+font-size:14px;
+line-height:1.8;
+padding:20px;
+width:90%;
+}
+
+button,
+.nextBtn{
+font-size:19px;
+padding:14px 24px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ===== MUSIC ===== -->
+
+<audio id="bgMusic" loop>
+<source src="Song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ===== PAGE 1 ===== -->
+
+<div id="p1" class="page active">
+
+<div class="container">
+
+<h1>🎀 Enter Password 🎀</h1>
+
+<input type="password" id="pass">
+
+<button onclick="login()">OPEN 💗</button>
+
+</div>
+
+</div>
+
+<!-- ===== PAGE 2 ===== -->
+
+<div id="p2" class="page">
+
+<div class="container">
+
+<h1>💗🎀 OUR TIME 🎀💗</h1>
+
+<div class="box">
+From 28/6/2024:
+<div id="t1"></div>
+</div>
+
+<h1 style="font-size:28px; margin-top:25px;">
+🌷 FIRST TIME SEE YOU 🌷
+</h1>
+
+<div class="box">
+From 7/7/2024:
+<div id="t2"></div>
+</div>
+
+<h2 class="nextBtn" onclick="goNext()">
+CLICK HERE 🫣🎁
+</h2>
+
+</div>
+
+<div class="voicePlayer">
+
+<div class="voicePlay"></div>
+
+<div class="voiceBars">
+
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===== PAGE 3 ===== -->
+
+<div id="p3" class="page">
+
+<div class="container">
+
+<h2 style="font-size:38px;">
+😍 لسه مكملين
+</h2>
+
+<div class="letter" id="letter"></div>
+
+<h2 style="margin-top:25px;">
+💗💗💗💗
+</h2>
+
+<h2 class="nextBtn" onclick="show(4)">
+تحبي تشوفي القمر ؟ 😍💗
+</h2>
+
+</div>
+
+<div class="voicePlayer">
+
+<div class="voicePlay"></div>
+
+<div class="voiceBars">
+
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===== PAGE 4 ===== -->
+
+<div id="p4" class="page">
+
+<div class="container">
+
+<h1 style="font-size:42px;">
+🌷 قمررر 🌷
+</h1>
+
+<div class="photoBox">
+
+<img src="qamar.jpg">
+
+</div>
+
+<h2 style="margin-top:25px;">
+عسل صح ؟ 😍💕
+</h2>
+
+</div>
+
+<div class="voicePlayer">
+
+<div class="voicePlay"></div>
+
+<div class="voiceBars">
+
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+// ===== LOGIN =====
+
+function login(){
+
+if(document.getElementById("pass").value==="1111"){
+
+show(2);
+
+startTimer();
+
+let music = document.getElementById("bgMusic");
+
+music.play();
+
+hearts();
+
+}else{
+
+alert("Wrong 😢");
+
+}
+
+}
+
+// ===== PAGE SWITCH =====
+
+function show(n){
+
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+
+document.getElementById("p"+n).classList.add("active");
+
+}
+
+// ===== TIMER =====
+
+function startTimer(){
+
+setInterval(()=>{
+
+let d1=new Date("2024-06-28");
+
+let d2=new Date("2024-07-07");
+
+let now=new Date();
+
+function format(ms){
+
+let s=Math.floor(ms/1000)%60;
+
+let m=Math.floor(ms/1000/60)%60;
+
+let h=Math.floor(ms/1000/60/60)%24;
+
+let d=Math.floor(ms/1000/60/60/24);
+
+return `${d} days ${h}h ${m}m ${s}s`;
+
+}
+
+document.getElementById("t1").innerText=format(now-d1);
+
+document.getElementById("t2").innerText=format(now-d2);
+
+},1000);
+
+}
+
+// ===== NEXT PAGE =====
+
+function goNext(){
+
+show(3);
+
+typeWriter();
+
+}
+
+// ===== TYPEWRITER =====
+
+function typeWriter(){
+
+let text = `هنا هيكون في هابي مسدج `;
+
+let i=0;
+
+let box=document.getElementById("letter");
+
+box.innerHTML="";
+
+function typing(){
+
+if(i<text.length){
+
+box.innerHTML += text[i];
+
+i++;
+
+setTimeout(typing,18);
+
+}
+
+}
+
+typing();
+
+}
+
+// ===== HEARTS =====
+
+let heartsStarted = false;
+
+function hearts(){
+
+if(heartsStarted) return;
+
+heartsStarted = true;
+
+setInterval(()=>{
+
+let h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML="💗";
+
+h.style.left=Math.random()*100+"vw";
+
+h.style.fontSize=(Math.random()*20+10)+"px";
+
+document.body.appendChild(h);
+
+setTimeout(()=>h.remove(),6000);
+
+},300);
+
+}
+
+</script>
+
+</body>
+  </html>
